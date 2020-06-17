@@ -1,0 +1,5 @@
+1. Considering how to apply positive affine transformation theorem to transform rank-2 bimatrix game to rank-1 bimatrix game for general case. However, I tried some methods but they fail for general cases. 
+
+2. (In progress), while parameterizing the dimension of matrices, I'm considering special cases from dimension-2 and more. 
+
+Since Thanksgiving, no meeting this week. 

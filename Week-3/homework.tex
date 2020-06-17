@@ -1,0 +1,115 @@
+\documentclass{article}
+\usepackage{algorithm, algpseudocode}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm, enumerate, hyperref}
+\usepackage{color}
+\usepackage{setspace}
+\usepackage{fancyhdr,lastpage}
+\usepackage{url}
+\usepackage{tabularx}
+\pagestyle{fancy}
+\lhead{\footnotesize Week 3 Proof Writeup (Sept 1)}
+\chead{}
+\rhead{\footnotesize CSC (791/495)-011 -- Fall 2017}
+\lfoot{}
+\cfoot{\small \thepage/\pageref*{LastPage}}
+\rfoot{}
+
+\title{Homework 2}
+%\author{Linfeng Zhou}
+
+
+\newcommand{\defproblem}[4]{%
+  \hfill\\\smallskip\noindent%
+  \begin{tabularx}{\textwidth}{|l X|}%
+    \hline%
+    \multicolumn{2}{|l|}{\pname{#1}}\\%
+    \textbf{Input:}&#2\\%
+    \textbf{Parameter:}&#3\\%
+    \textbf{Question:}&#4\smallskip\\\hline%
+  \end{tabularx}%
+  \smallskip%
+}%
+
+\newcommand{\pname}[1]{\textnormal{\textsc{#1}}}
+
+\newtheorem*{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem*{lemma}{Lemma}
+
+\title{Homework 2}
+%\author{Linfeng Zhou}
+
+
+\begin{document}
+\maketitle
+
+
+\subsection*{Definitions \& Notation}
+\begin{definition}
+A formula $F$ is in \emph{$r$-CNF} (conjunctive normal form) if for some positive
+integer $n$, $F = C_1 \land C_2 \land \cdots \land C_n$, where each $C_i$ is a \emph{clause} which
+consists of exactly $r$ literals and/or their negations \textsc{OR}'ed together, i.e.
+$C_i = x_1 \lor \neg x_2 \lor \cdots \lor x_r$.
+\end{definition}
+
+
+\defproblem{Min-$2$-SAT}
+%
+{A 2-CNF formula $\phi$ and a non-negative integer $k$}
+%
+{$k$}
+%
+{Is there an assignment for $\phi$ that satisfies at most~$k$ clauses?}
+%
+
+
+\subsection*{Proofs Required}
+
+\begin{theorem} ({\small Exercise 3.13 in Cygan et al.}) \pname{Min-2-SAT} can be solved in
+  time $2^kn^{O(1)}$ using a bounded search tree algorithm.
+\end{theorem}
+
+\begin{proof}
+Given an instance of \pname{Min-2-SAT}, \((\phi, k)\), where \(\phi=C_1 \land C_2 \land \cdots \land C_n\) and each clause in \(\phi\) is of four forms. Namely, \(C_i = v_s \lor v_p\) or \(C_i = v_s \lor \neg v_p\) or \(C_i = \neg v_s \lor v_p\) or \(C_i = \neg v_s \lor \neg v_p\), \(i \in [1,\cdots,n], s,p \in [1,\cdots,r]\), where \(n\) is the number of clauses and \(r\) is the number of literals and negations. We first describe the main strategy of our algorithm. Since we want an assignment for the instance \(\phi\) that satisfies at most \(k\) clauses, our strategy is trying to make the number of true clauses in \(\phi\) as small as possible. Namely, we want to assign false clauses in \(\phi\) as many as possible. Therefore, our method includes two steps.
+
+In the first step, we search literals \(v_s\)'s that appear as the same form in clauses of \(\phi\) and mark \(v_s\), \(s \in [1,\cdots, r]\) to be false (i.e., for every literal \(v_s\), if there doesn't exist negation \(\neg v_s\) in any clause of \(\phi\) but there exists \(v_s\) in some clauses, then we mark these \(v_s\)'s to be ``false''). Furthermore, we search negations \(\neg v_s\)'s that appear as the same for in clauses of \(\phi\) and mark \(v_s\), \(s \in [1,\cdots,r]\) to be true (i.e., for every negation \(\neg v_s\), if there doesn't exist literal \(v_s\) in any clause of \(\phi\) but there exists \(\neg v_s\) in some clauses, then we mark these \(v_s\)s to be ``true''). 
+
+In the second step, we ignore those clauses in which both of two literals or negations have been marked by ``true'' or ``false'' in the first step, since this clause has been ``false''. Therefore, we focus on those clauses in which no literal or negation has been marked and those clauses in which one of two literals (or negations) has been remarked. Among these clauses, we design a bounded search tree algorithm for literals \(v_s\)'s that have not been remarked. We assume that the literal \(v_s\) appears in one clause \(C_m\) and its negation appears in another different clause \(C_n\). Therefore the intuition to design the bounded search tree algorithm is to make one of \(C_m\) and \(C_n\) to be ``false'' by setting \(v_s\) in \(C_m\) to be ``false'' or setting \(\neg v_s\) in \(C_n\) to be ``false'' (namely setting \(v_s\) to be ``true'').
+
+We now describe the recursive branching algorithm more formally. In the branch where \(v \in C_m\) and its negation \(\neg v \in C_n\), we recursively branch on two cases by considering either marking the literal \(v \in C_m\) to be ``false'' and reduce the parameter \(k\) by 1. In the second branch we set \(\neg v \in C_n\) to be ``false'' (namely, mark \(v\) to be ``true'') and reduce the parameter \(k\) by 1. Note that if we set \(v \in C_m\) to be ``false'', then \(C_m\) is ``false'', and if we set \(\neg v \in C_n\) to be ``false'', then \(C_n\) is ``false''. 
+
+Finally we analyze the running time of our method. The first step can be done in time \(n^{O(1)}\) because we can just search those literals or negations in \(\phi\), in time \(n^{O(1)}\). The running time of the bounded search tree is bounded by $$(\text{the number of leaves in the search tree}) \times (\text{time taken at each node})$$ Clearly the time taken at each node is bounded by \(n^{O(1)}\) because we can still search those literals or negations \(v\)'s that \(v\) is in \(C_m\) and its negation \(\neg v \in C_n\). The bounded search tree runs with parameter \(k\). Below its root, it has two same subtrees and each subtree for the same bounded search tree algorithm runs with parameter \(k-1\). This means that we can define a recursive formula
+\begin{equation}
+T(i)=
+\left\{
+\begin{aligned}
+&T(i-1)+T(i-1) &\text{  if   } i \geq 2\\
+&1 &\text{ otherwise}
+\end{aligned}
+\right.
+\end{equation}
+Then the number of leaves of the bounded search tree is bounded by \(T(k)\). We prove that \(T(k)\) is bounded by \(2^k\) as follows. $$T(k)=2T(k-1)=2^2T(k-2)=\cdots=2^kT(1)=2^k$$ Therefore the running time of our second step is \(2^k\cdot n^{O(1)}\). Overall, \pname{Min-2-SAT} can be solved in time \(2^k \cdot n^{O(1)}\) using bounded search tree algorithm. 
+
+
+
+
+\end{proof}
+
+
+
+
+%\vfill
+%
+%\subsubsection*{Submission notes}
+%\begin{itemize}
+%\item Due at 9:00 am on Friday, September 8.
+%\item Use the \href{https://github.com/bdsullivan/ParameterizedAlgorithms-Fall2017/tree/master/templates/homework}{latex homework template}.
+%\item Please put your name in a comment at the top of your tex file (but {\it do not
+%have it display in the PDF}). This will help prevent any bias in grading.
+%\item Keep all files in \texttt{Week-3} folder of git repository
+%\item Name source file \texttt{homework.tex}
+%\item Upload a compiled version named \texttt{compiled\_homework.pdf}
+%\end{itemize}
+
+\end{document}

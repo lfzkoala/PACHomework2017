@@ -1,0 +1,10 @@
+Read two key papers of our project:
+
+- Parameterized Two-Player Nash Equilibrium (Hermelin-Huang-Kratsch-Wahlstrom)
+
+- Constant Rank Two-player games are PPAD-HARD (by Ruta Mehta)
+
+arranged a meeting with teammates from 11:30 to 12:30 on Thursday. 
+
+Think of Kyle's suggestion posted on Slack. 
+

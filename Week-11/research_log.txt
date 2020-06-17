@@ -1,0 +1,19 @@
+Specified the research problem we would like doing. That is, we will try to find a FPT algorithm for rank-k bimatrix game. 
+
+Checked the paper that proved rank-k bimatrix game when k is no less than 3. Read the proof but is not totally understandable for me. I will continue reading the proof. 
+
+Reviewed the report again to make sure our research direction is sound.  
+
+Also I meet with my teammates in class and discussed how to distribute tasks. 
+
+We scheduled a meeting on Thursday 11:30 - 12:30 
+Other meetings we’ll schedule
+
+We plan to read the paper: https://link.springer.com/content/pdf/10.1007%2Fs00453-011-9609-z.pdf
+
+We decided to look at Max rank of two matrices individually and parameterize 2 Nash problem 
+
+We intend to do: 
+  Read reference one individually 
+  Understand algorithm for nash equilibrium
+  Review 2-3 relevant papers for the problems and post them on slack 

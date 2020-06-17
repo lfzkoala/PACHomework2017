@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage{algorithm, algpseudocode}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb, amsthm, enumerate, hyperref}
+\usepackage{color}
+\usepackage{setspace}
+\usepackage{fancyhdr,lastpage}
+\usepackage{url}
+\usepackage{tabularx}
+\pagestyle{fancy}
+\lhead{\footnotesize Week 5 Proof Writeup (Sept 15)}
+\chead{}
+\rhead{\footnotesize CSC (791/495)-011 -- Fall 2017}
+\lfoot{}
+\cfoot{\small \thepage/\pageref*{LastPage}}
+\rfoot{}
+
+
+\newcommand{\defproblem}[4]{%
+  \hfill\\\smallskip\noindent%
+  \begin{tabularx}{\textwidth}{|l X|}%
+    \hline%
+    \multicolumn{2}{|l|}{\pname{#1}}\\%
+    \textbf{Input:}&#2\\%
+    \textbf{Parameter:}&#3\\%
+    \textbf{Question:}&#4\smallskip\\\hline%
+  \end{tabularx}%
+  \smallskip%
+}%
+
+\newcommand{\pname}[1]{\textnormal{\textsc{#1}}}
+
+\newtheorem*{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem*{lemma}{Lemma}
+
+\title{Homework 4}
+%\author{Linfeng Zhou}
+\begin{document}
+
+\maketitle
+
+%\subsection*{Definitions \& Notation}
+%\begin{definition}
+%    A \emph{tree decomposition} of a graph $G = (V,E)$
+%    is a pair $(T, \mathcal{X})$ with tree $T = (I,F)$
+%    and bags $\mathcal{X} = \{X_i \subseteq V \,:\, i \in I \}$
+%    satisfying
+%    \begin{enumerate}
+%      \item $\forall v \in V$, $\exists i \in I$ with $v \in X_i$
+%      \item $\forall (u,v) \in E$, $\exists j \in I$ with $\{u,v\} \subseteq X_j$
+%      \item $\forall v \in V$, $\{i \,:\, v \in X_i\}$ form a connected subtree of $T$
+%    \end{enumerate}
+%    The \emph{width} of $T$ is $\max\{|X_i| - 1\}$.
+%\end{definition}
+%
+%\begin{definition} The \emph{treewidth} of a graph $G$, denoted tw$(G)$, is the minimum
+%  width of a valid tree decomposition of $G$.
+%\end{definition}
+
+
+\subsection*{Proofs Required}
+
+\begin{theorem} Let $G$ be a graph and $(T = (I,F), \mathcal{X})$ a tree decomposition
+  of width at most $k$. Prove that if there are at least $k+1$ vertex-disjoint
+  paths between vertices $x$ and $y$ in $G$, some bag of $(T,\mathcal{X})$ contains
+  both $x$ and $y$.
+\end{theorem}
+
+\begin{proof}
+We prove by contradiction. We assume that there is no bag containing both \(x\) and \(y\), i.e., we assume that \(x\) and \(y\) are in two different bags. 
+
+%Since there are at least \(k+1\) vertex-disjoint paths between \(x\) and \(y\) in the graph \(G\), we denote the \(k+1\) vertex-disjoint paths between \(x\) and \(y\) by \(p_1,\cdots,p_{k+1}\). We denote \(k+1\) neighbors of \(x\) that are on these \(k+1\) paths as \((nx_1,nx_2,\cdots,nx_{k+1})\) and \(k+1\) neighbors of \(y\) that are on these \(k+1\) paths as \((ny_1,ny_2,\cdots,ny_{k+1})\). Note that maybe there are other vertices except \(nx_i\) and \(ny_i\) from \(x\) to \(y\) and \(x\) and \(y\) may have other paths
+
+%Note that \(x\) and \(y\) may have other neighbors except those neighbors on these \(k+1\) paths. We denote the set of neighbors as \(NX\) and \(NY\) (i.e., \(NX\) consists of neighbors of \(x\) without \(nx_1\)).
+
+Since the tree decomposition of width at most \(k\), then we have \(\mathsf{max}|X_i| \leq k+1\) due to the definition of tree width. 
+
+%Therefore, there must be at least two bags containing \(x\) and at least two bags containing \(y\) respectively, because otherwise it would contradict to the fact that \(\mathsf{max}|X_i| \leq k+1\) and there are \(k+1\) vertex-joint paths from \(x\) to \(y\).
+
+We assume there are \(n\) bags containing \(x\) and \(m\) bags containing \(y\). We denote those bags containing \(x\) as \(\{B_i\}_{i \in [n]}\). Similarly, we denote those bags containing \(y\) as \(\{B_j\}_{j \in [n]}\). Note that we do not want to consider those bags that consists of neither \(x\) nor \(y\) and it is safe. 
+
+%, where \(B_j = \{x, \{nx_r\}_{r \in S_j}, NX_j\}\).
+%
+%where \(B_i = \{x, \{nx_r\}_{r \in S_i}, NX_i\}\), \(S_i \subset [1,\cdots,k+1]\) is the index set of neighbors of \(x\) corresponding to the bag \(B_i\) and \(NX_i \subseteq NX\) .  
+
+We note that the bags \(\textbf{B}_x=\{B_i\}_{i \in [n]}\) containing \(x\) and the bags \(\textbf{B}_y=\{B_j\}_{j \in [m]}\) containing \(y\) comprise of two connected components respectively, and these two connected components are connected by only one edge between some bag \(B_u \in \textbf{B}_x\) and another bag \(B_v \in \textbf{B}_y\), \(u \in [n]\), \(v \in [m]\), since \(T\) is a tree decomposition and no bag contains both \(x\) and \(y\).
+
+Now we prove the following lemma.
+
+\begin{lemma}
+Given a tree decomposition \(T\) of the graph \(G\), let edge \(ab\) be an arbitrary edge in the tree decomposition \(T\). The forest \(T-ab\) obtained from \(T\) by deleting edge \(ab\) consists of two connected components \(T_a\) (containing \(a\)) and \(T_b\) (containing \(b\)). Let \(X_a\) be an arbitrary bag in \(T_a\) and \(X_b\) be an arbitrary bag in \(T_b\). \(X_a\) and \(X_b\) are connected by edge \(ab\). Then \(X_a \cap X_b\) is a separator of \(G\).
+\end{lemma}
+
+\begin{proof}
+To prove the lemma above, we denote vertices in \(T_a\) as \(V_a = \{v|v\in T_a, v \notin T_b\}\), and vertices in \(T_b\) as \(V_b=\{v | v\in T_b, v \notin T_a\}\). We first show that \(T_a \cap T_b\) is a separator of \(G\). We prove by contradiction. We assume that \(T_a \cap T_b\) is not a separator, then there exists an edge \(zw\), where \(z \in V_a\) and \(w \in V_b\). However, there must exist a bag covering \(z\) and \(w\) due to properties of tree decomposition, then either \(T_a\) consists of both \(z\) and \(w\) or \(T_b\) consists of both \(z\) and \(w\). This contradicts to the fact that \(z \in V_a\) and \(w \in V_b\) and \(V_a \cap V_b = \emptyset\). This proves \(T_a \cap T_b\) is a separator of \(G\). Next, since the continuity property of tree-decomposition saying that if \(v \in X_a\) and \(v \in X_b\) then \(v \in X_k\) for all \(k\) on the path from \(a\) and \(b\), and \(ab\) is the only edge between \(T_a\) and \(T_b\), then we have \(T_a \cap T_b = X_a \cap X_b\). Therefore, \(X_a \cap X_b\) is also a separator. This finishes proving the lemma.
+\end{proof}
+
+Then we consider the two connected components \(\textbf{B}_x=\{B_i\}_{i \in [n]}\) and \(\textbf{B}_y=\{B_j\}_{j \in [m]}\) we just described. Consider the bag \(B_u \in \textbf{B}_x\) containing \(x\) connecting to a bag \(B_v \in \textbf{B}_y\) containing \(y\). Since \(|B_u| \leq k+1\) and \(|B_v| \leq k+1\) and the fact that the two connected components \(\textbf{B}_x\) and \(\textbf{B}_y\) are connected by only one edge between \(B_u \in \textbf{B}_x\) and \(B_v \in \textbf{B}_y\), we have that \(B_u \cap B_v\) is a separator of \(G\) using the lemma we proved above and that \(|B_u \cap B_v| \leq k\). However, there are \(k+1\) vertex-disjoint paths from \(x\) to \(y\), therefore there is at least \(1\) edge connecting \(x\) and \(y\) and this edge should be covered by some bag in the tree decomposition. This contradicts to our assumption that there is no bag containing both \(x\) and \(y\). This finishes the proof.
+\end{proof}
+ 
+
+
+
+
+
+
+%\subsection*{Additional Problems}
+%\textbf{\textit{Do not turn in solutions to these as part of your homework! Feel free
+%to discuss them in \#problem-discussion, however.}}
+%\begin{theorem} Let $H$ be a complete bipartite graph with parts $A$ and $B$. If $H$
+%  is a subgraph of $G$, then every tree decomposition of $G$ includes either a bag
+%  that contains $A$ or a bag that contains $B$.
+%\end{theorem}
+%
+%\begin{theorem} Prove that an $n \times n$ planar grid has treewidth at most $n$
+%  and treewidth at least $n-1$ by giving strategies for cops and the robber, respectively,
+%  in appropriate settings of the Cops \& Robbers game characterizing treewidth.
+%\end{theorem}
+
+%\vfill
+%
+%\subsubsection*{Submission notes}
+%\begin{itemize}
+%\item Due at 9:00 am on Friday, September 22.
+%\item Use the \href{https://github.com/bdsullivan/ParameterizedAlgorithms-Fall2017/tree/master/templates/homework}{latex homework template}.
+%\item Please put your name in a comment at the top of your tex file (but {\it do not
+%have it display in the PDF}). This will help prevent any bias in grading.
+%\item Keep all files in \texttt{Week-5} folder of git repository
+%\item Name source file \texttt{homework.tex}
+%\item Upload a compiled version named \texttt{compiled\_homework.pdf}
+%\end{itemize}
+
+\end{document}

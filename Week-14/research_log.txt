@@ -1,0 +1,14 @@
+This week I did the following tasks:
+
+- This week I was attending Theory of Cryptography conference from 11.12 to 11.15. But I still work on the project during my part time. 
+
+- I continue reading the paper about polynomial-time algorithm to solve rank-1 bimatrix game. I tried to find the impact of applying this algorithm to solving rank-2 bimatrix game. and the impact of applying this algorithm to solving l-sparsity game where we can change some entries. However, I found it is difficult to find a polynomial-time solution for both of them. The main difficulty inherits the disconnection between NEs as mentioned in the paper of Prof. Ruta Mehta. 
+
+- We arranged a meeting on Thursday 11:30 AM with Evan and Chris (Rahu was absent). We start considering a new direction of our research. That is, applying positive affine transformation to transfrom rank-2 bimatrix game to rank-1 bimatrix game.
+
+- In class our group discussed with Kyle and got into much more details. We had several ideas that I will mention in the scribe notes.
+
+- I'm responsible for doing scribe notes this week. 
+
+
+

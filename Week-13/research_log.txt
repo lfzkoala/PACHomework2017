@@ -1,0 +1,12 @@
+Read the key paper of our project:
+
+"A polynomial time algorithm for Rank-1 Bimatrix games" by Ruta Mehta
+
+Try to understand the main idea of this algorithm but still don't understand some details. 
+
+arrange a meeting at 11:30 pm with Evan Li (Rahul was in California for Interview and Chris was busy)
+
+Distributed tasks in class. I will do scribe notes next week and I will get into details about the techniques of the paper. Especially I will try to find special cases that if we change some entries the algorithm still efficiently work.  
+
+
+

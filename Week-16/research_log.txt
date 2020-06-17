@@ -1,0 +1,7 @@
+This week I focus on trying to modify Ruta Mehta's algorithm on solving rank-2 bimatrix game.
+
+Basically I have understood the approch of Ruta Mehta's method. I'm trying to argue why rank-1 algorithm doesn't work in rank-2 bimatrix game and show some negative results.  
+
+I met Evan and Chris on Monday 3pm
+
+
